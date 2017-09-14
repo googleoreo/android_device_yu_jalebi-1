@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!--
     Copyright (c) 2014, The Linux Foundation. All rights reserved.
+    Copyright (c) 2014-2016, The Linux Foundation. All rights reserved.
 
     Redistribution and use in source and binary forms, with or without
     modification, are permitted provided that the following conditions are
@@ -85,6 +86,8 @@
     <ctl name="Speaker Ext" value="DISABLE" />
     <!-- Added by lichuangchuang for ext_spk pa control (8916) SW00000000 2014/05/28 end -->
     <ctl name="Speaker Boost" value="DISABLE" />
+    <ctl name="Speaker Boost" value="ENABLE" />
+    <ctl name="EAR PA Boost" value="ENABLE" />
     <ctl name="EAR PA Gain" value="POS_1P5_DB" />
     <ctl name="MI2S_RX Channels" value="One" />
     <ctl name="MI2S_TX Channels" value="One" />
@@ -576,12 +579,15 @@
         <ctl name="Speaker Ext" value="ENABLE" />
         <path name="speaker not open PA" />
         <!-- Modify by lichuangchuang for ext_spk pa control (8916) SW00000000 2014/07/11 end -->
+        <ctl name="RX3 MIX1 INP1" value="RX1" />
+        <ctl name="SPK DAC Switch" value="1" />
     </path>
 
     <path name="speaker-mic">
         <path name="adc1" />
         <!-- Modify by lichuangchuang for IIR1 INP1 MUX (8916) SW00000000 2014/09/05-->
         <ctl name="IIR1 INP1 MUX" value="ZERO" />
+        <ctl name="IIR1 INP1 MUX" value="DEC1" />
     </path>
 
     <path name="handset">
@@ -606,6 +612,15 @@
         <ctl name="HPHL" value="Switch" />
         <ctl name="HPHR" value="Switch" />
 		    <ctl name="EAR PA Gain" value="POS_6_DB" />
+    </path>
+
+    <path name="headphones">
+        <ctl name="MI2S_RX Channels" value="Two" />
+        <ctl name="RX1 MIX1 INP1" value="RX1" />
+        <ctl name="RX2 MIX1 INP1" value="RX2" />
+        <ctl name="RDAC2 MUX" value="RX2" />
+        <ctl name="HPHL" value="Switch" />
+        <ctl name="HPHR" value="Switch" />
     </path>
 
     <path name="headset-mic">
@@ -658,6 +673,7 @@
         <ctl name="RX1 Digital Volume" value="83" />
         <ctl name="RX2 Digital Volume" value="83" />
         <!-- Modify by lichuangchuang for ext_spk pa control (8916) SW00118848 2015/03/06 end -->
+        <path name="speaker" />
     </path>
 
     <path name="voice-speaker-mic">
@@ -679,6 +695,8 @@
         <path name="speaker" />
         <!--path name="headphones" /-->
         <!-- Modify by lichuangchuang for ext_spk pa control (8916) SW00000000 2014/07/11 end -->
+        <path name="headphones" />
+        <path name="speaker" />
     </path>
 
     <path name="usb-headphones">
@@ -826,14 +844,16 @@
 
     <path name="line">
           <path name="headphones" />
+    <path name="unprocessed-handset-mic">
+        <path name="handset-mic" />
     </path>
 
-    <path name="voice-line">
-          <path name="voice-headphones" />
+    <path name="unprocessed-mic">
+        <path name="unprocessed-handset-mic" />
     </path>
 
-    <path name="speaker-and-line">
-          <path name="speaker-and-headphones" />
+    <path name="ADSP testfwk">
+        <ctl name="MI2S_DL_HL Switch" value="1" />
     </path>
 
 </mixer>
